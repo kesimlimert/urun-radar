@@ -1,5 +1,8 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import Image from "next/image";
+import AuthButton from "@/components/AuthButton";
+import Logo from "@/public/logo.png";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -7,8 +10,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Ürün Radar",
+  description: "Ürün Radar is a platform that helps you track the reviews of your favorite products. Log in to get started!",
 };
 
 export default function RootLayout({
