@@ -1,5 +1,5 @@
 
-export function Welcome() {
+export default function Welcome() {
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">

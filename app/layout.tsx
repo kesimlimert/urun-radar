@@ -1,8 +1,5 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import Image from "next/image";
-import AuthButton from "@/components/AuthButton";
-import Logo from "@/public/logo.png";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

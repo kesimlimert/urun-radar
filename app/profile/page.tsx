@@ -1,9 +1,11 @@
-import AuthButton from "../components/AuthButton";
+import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import { Welcome } from "@/app/welcome";
+import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
 import Navbar from "@/components/Navbar";
 
-export default async function Index() {
+import { redirect } from "next/navigation";
+
+export default async function ProtectedPage() {
   const supabase = createClient();
 
   const {
@@ -11,17 +13,19 @@ export default async function Index() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return (
-        <Welcome />
-    );
+    return redirect("/login");
   }
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <Navbar />
+      <div className="w-full">
+        <Navbar />
+      </div>
+
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
         <main className="flex-1 flex flex-col gap-6">
-          <h1 className="text-4xl font-bold text-center">Signed in anasayfa</h1>
+          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
+          <FetchDataSteps />
         </main>
       </div>
     </div>
