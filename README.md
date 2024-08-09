@@ -1,6 +1,6 @@
 # UrunRadar
 
-**UrunRadar** is a platform where users can freely review products and share their opinions with others. Our goal is to create a community-driven space where quality, transparency, and honesty are at the forefront of product reviews.
+**UrunRadar** is a platform where users can freely review products and share their opinions with others. My goal is to create a community-driven space where quality, transparency, and honesty are at the forefront of product reviews.
 
 ## Features
 
@@ -15,3 +15,6 @@
 2. **Review Products**: Write reviews on any product you’ve used or are familiar with.
 3. **Vote on Reviews**: Browse reviews by other users and vote on those you find most helpful and transparent.
 4. **Earn Points**: Gain points based on the votes your reviews receive. The more helpful your review, the more points you earn!
+
+<br>
+It is under development.
