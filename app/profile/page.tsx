@@ -1,19 +1,37 @@
-import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
 import Navbar from "@/components/Navbar";
-
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
-export default async function ProtectedPage() {
+export default async function ProtectedPage({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   const supabase = createClient();
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) {
     return redirect("/login");
+  }
+
+  const { data: profileData, error: profileError } = await supabase
+    .from("profile")
+    .select()
+    .eq("id", user.id);
+
+  if (profileError) {
+    console.error(profileError);
+    return <div>Error loading profile</div>;
+  }
+
+  const profile = profileData[0];
+
+  if (!profile.display_name) {
+    redirect("/username");
   }
 
   return (

@@ -17,9 +17,21 @@ export default async function AuthButton() {
     return redirect("/login");
   };
 
+  const { data: profileData, error: profileError } = await supabase
+    .from("profile")
+    .select()
+    .eq("id", user?.id);
+
+  if (profileError) {
+    console.error(profileError);
+    return <div>Error loading profile</div>;
+  }
+
+  const userName = profileData[0].display_name;
+
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      Hey, {userName ? userName : user.email}!
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           Logout

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ProfileButton() {
   return (
-    <Link href="/createProfile">
+    <Link href="/profile">
       <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
         Profile
       </button>
