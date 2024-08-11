@@ -17,17 +17,12 @@ export default async function AuthButton() {
     return redirect("/login");
   };
 
-  const { data: profileData, error: profileError } = await supabase
+  const { data: profileData } = await supabase
     .from("profile")
     .select()
     .eq("id", user?.id);
 
-  if (profileError) {
-    console.error(profileError);
-    return <div>Error loading profile</div>;
-  }
-
-  const userName = profileData[0].display_name;
+  const userName = profileData && profileData[0]?.display_name;
 
   return user ? (
     <div className="flex items-center gap-4">
