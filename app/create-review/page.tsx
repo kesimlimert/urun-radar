@@ -3,6 +3,7 @@ import { SubmitButton } from "@/components/SubmitButton";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import { uploadImage } from "@/utils/cloudinary";
+import { redirect } from "next/navigation";
 
 export default function CreateReview() {
   const createReview = async (formData: FormData) => {
@@ -23,6 +24,7 @@ export default function CreateReview() {
         image: imageUrl,
         created_by: created_by,
       });
+    redirect("/");
   };
 
   return (
