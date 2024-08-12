@@ -1,4 +1,4 @@
-import { SubmitButton } from "./submit-button";
+import { SubmitButton }  from "@/components/SubmitButton";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
@@ -14,8 +14,7 @@ export default function Username({
       data: { user },
     } = await supabase.auth.getUser();
     const displayName = formData.get("display_name") as string;
-    console.log(displayName);
-    
+
     const { error } = await supabase
       .from('profile')
       .update({ display_name: displayName })
@@ -26,7 +25,7 @@ export default function Username({
       return redirect("/profile?message=Could not set this display name");
     }
 
-    return redirect("/profile");
+    return redirect("/");
 
   };
 
