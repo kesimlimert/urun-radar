@@ -68,6 +68,7 @@ export default function CreateReview() {
               id="image"
               name="image"
             />
+            <p className="text-sm text-gray-400">Only .png and .jpeg accepted</p>
             <SubmitButton
               formAction={createReview}
               className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"

@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { Welcome } from "@/app/welcome";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Index() {
   const supabase = createClient();
@@ -10,11 +11,11 @@ export default async function Index() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: posts, error: postsError } = await supabase
-    .from("posts")
-    .select(`title, description, created_by, created_at, image, upvote`);
+  const { data: reviews, error: reviewsError } = await supabase
+    .from("reviews")
+    .select(`id, title, description, created_by, created_at, image, upvote`);
 
-  console.log(posts);
+  console.log(reviews);
 
   if (!user) {
     return <Welcome />;
@@ -32,13 +33,24 @@ export default async function Index() {
             </button>
           </Link>
         </div>
-        {posts && posts.length > 0 ? (
+        {reviews && reviews.length > 0 ? (
           <div>
-            {posts.map((post, index) => (
-              <div key={index} className="mb-4">
-                <h2 className="text-2xl font-semibold">{post.title}</h2>
-                <p>{post.description}</p>
+            {reviews.map((review) => (
+              <div key={review.id} className="flex">
+                <div>
+                <h2 className="text-2xl font-semibold">{review.title}</h2>
+                <p className="whitespace-pre-line">{review.description}</p>
                 {/* Add other post details here */}
+                </div>
+                <div>
+                  <Image
+                    src={review.image}
+                    width={200}
+                    height={200}
+                    quality={100}
+                    alt={review.title}
+                  />
+                </div>
               </div>
             ))}
           </div>
