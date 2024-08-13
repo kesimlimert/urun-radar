@@ -13,7 +13,7 @@ export default async function Index() {
 
   const { data: reviews, error: reviewsError } = await supabase
     .from("reviews")
-    .select(`id, title, description, created_by, created_at, image, upvote`);
+    .select(`id, title, created_by, comments, upvote, tags`);
 
   console.log(reviews);
 
@@ -36,20 +36,25 @@ export default async function Index() {
         {reviews && reviews.length > 0 ? (
           <div>
             {reviews.map((review) => (
-              <div key={review.id} className="flex">
-                <div>
-                <h2 className="text-2xl font-semibold">{review.title}</h2>
-                <p className="whitespace-pre-line">{review.description}</p>
-                {/* Add other post details here */}
-                </div>
-                <div>
-                  <Image
-                    src={review.image}
-                    width={200}
-                    height={200}
-                    quality={100}
-                    alt={review.title}
-                  />
+              <div key={review.id} className="flex p-5 mb-2 bg-btn-background">
+                <div className="w-full">
+                  <h2 className="text-2xl font-semibold">{review.title}</h2>
+                  <div className="flex items-center justify-between w-full gap-5 pt-3">
+                    <div className="flex gap-2">
+                      {review.tags.map((tag: string) => (
+                        <span key={tag} className="px-4 py-1 bg-neutral-700 rounded-full">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      <p className="text-sm text-gray-400">
+                        <b>Created by:</b> {review.created_by}
+                      </p>
+                      <p className="text-sm text-gray-400 ml-2"><b>Votes: </b> {review.upvote ? review.upvote : 0}</p>
+                      <p className="text-sm text-gray-400 ml-2"><b>Comments: </b> {review.comments ? review.comments.length : 0}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
