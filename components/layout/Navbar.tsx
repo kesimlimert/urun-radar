@@ -1,9 +1,9 @@
 import React from "react";
-import AuthButton from "./AuthButton";
+import AuthButton from "../buttons/AuthButton";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
-import ProfileButton from "./ProfileButton";
+import ProfileButton from "../buttons/ProfileButton";
 import Logo from "@/public/logo.png";
 
 

@@ -1,8 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { Welcome } from "@/app/welcome";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import Link from "next/link";
-import Image from "next/image";
 
 export default async function Index() {
   const supabase = createClient();

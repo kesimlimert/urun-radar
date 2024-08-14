@@ -1,14 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 
-export default async function ProtectedPage({
-  searchParams,
-}: {
-  searchParams: { message: string };
-}) {
+export default async function ProtectedPage() {
   const supabase = createClient();
   const {
     data: { user },

@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
-import { SubmitButton } from "@/components/SubmitButton";
-import Navbar from "@/components/Navbar";
+import { SubmitButton } from "@/components/buttons/SubmitButton";
+import Navbar from "@/components/layout/Navbar";
 import Link from "next/link";
 import { uploadImage } from "@/utils/cloudinary";
 import { redirect } from "next/navigation";

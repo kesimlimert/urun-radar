@@ -1,4 +1,4 @@
-import { SubmitButton }  from "@/components/SubmitButton";
+import { SubmitButton }  from "@/components/buttons/SubmitButton";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
