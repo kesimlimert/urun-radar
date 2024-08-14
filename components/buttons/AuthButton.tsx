@@ -23,10 +23,11 @@ export default async function AuthButton() {
     .eq("id", user?.id);
 
   const userName = profileData && profileData[0]?.display_name;
+  const points = profileData && profileData[0]?.points;
 
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {userName ? userName : user.email}!
+      <p className="text-xs">{userName ? userName + " - " + points + " points"  : user.email}</p>
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           Logout
