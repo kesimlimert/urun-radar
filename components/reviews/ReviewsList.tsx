@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
+import Filter from "../Filter";
 
 dayjs.extend(relativeTime);
 
@@ -20,10 +22,27 @@ type ReviewsListItemProps = {
 };
 
 export default function ReviewsList({ reviews }: ReviewsListItemProps) {
+  const [selectedTag, setSelectedTag] = useState<string>("");
+
+  const allTags = Array.from(new Set(reviews.flatMap((review) => review.tags)));
+
+  const filteredReviews = selectedTag
+    ? reviews.filter((review) => review.tags.includes(selectedTag))
+    : reviews;
+
   return (
     <>
-      {reviews.map((review) => (
-        <Link key={review.id} href={"reviews/" + review.id} className="flex p-5 mb-5 bg-btn-background">
+      <Filter
+        tags={allTags}
+        selectedTag={selectedTag}
+        onTagChange={setSelectedTag}
+      />
+      {filteredReviews.map((review) => (
+        <Link
+          key={review.id}
+          href={"reviews/" + review.id}
+          className="flex p-5 mb-5 bg-btn-background"
+        >
           <div className="w-full">
             <h2 className="text-2xl font-semibold">{review.title}</h2>
             <div className="flex items-center justify-between w-full gap-5 pt-3">
