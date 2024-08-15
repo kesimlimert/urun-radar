@@ -31,8 +31,6 @@ export default async function ProtectedPage() {
 
   const profile = profileData[0];
 
-  console.log(profile);
-
   if (!profile.display_name) {
     redirect("/username");
   }
