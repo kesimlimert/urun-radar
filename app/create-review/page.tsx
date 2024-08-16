@@ -61,6 +61,7 @@ export default function CreateReview() {
               name="description"
               placeholder="Description"
               required
+              rows={10}
             />
             <label className="text-md" htmlFor="image">
               Image

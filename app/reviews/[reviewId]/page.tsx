@@ -1,16 +1,138 @@
-import { createClient } from "@/utils/supabase/server"
-export default async function Review({ params }: { params: { reviewId: string } }) {
+import { createClient } from "@/utils/supabase/server";
+import Navbar from "@/components/layout/Navbar";
+import Link from "next/link";
+import Image from "next/image";
+import { IconSquareArrowUp } from "@tabler/icons-react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { SubmitButton } from "@/components/buttons/SubmitButton";
+import { revalidatePath } from "next/cache";
 
-	const supabase = createClient();
-	const { data, error } = await supabase.from("reviews").select().eq("id", params.reviewId);
-	
-	if (data?.length === 0) {
-		throw new Error("Review not found");
-	}
+dayjs.extend(relativeTime);
 
-	return (
-		<div>
-			<h1>Review {params.reviewId}</h1>
-		</div>
-	)
+export default async function Review({
+  params,
+}: {
+  params: { reviewId: string };
+}) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data: reviewData, error } = await supabase
+    .from("reviews")
+    .select()
+    .eq("id", params.reviewId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (reviewData?.length === 0) {
+    throw new Error("Review not found");
+  }
+
+  const { data: reviewOwnerData } = await supabase
+    .from("profile")
+    .select()
+    .eq("display_name", reviewData[0].created_by);
+
+  if (reviewOwnerData?.length === 0) {
+    throw new Error("Review owner not found");
+  }
+
+  const review = reviewData[0];
+  const reviewOwner = reviewOwnerData?.[0];
+
+  const createComment = async (formData: FormData) => {
+    "use server";
+    const comment = formData.get("comment");
+    const supabase = createClient();
+    const comments = reviewData?.[0]?.comments ?? [];
+    await supabase.from("reviews").update({
+      comments: [...comments, comment],
+    }).eq("id", params.reviewId);
+	revalidatePath(`/reviews/${params.reviewId}`);
+  };
+
+  console.log(review);
+  console.log(reviewOwner);
+  console.log(user);
+
+  return (
+    <div className="flex-1 w-full flex flex-col items-center">
+      <Navbar />
+      <main className="w-full flex flex-col mt-20 max-w-4xl px-3">
+        <div className="flex w-full mb-10 justify-between">
+          <h1 className="text-4xl font-bold">{review.title}</h1>
+          {reviewOwner.id === user?.id && (
+            <Link href={"/update-review/" + params.reviewId}>
+              <button className="rounded-md px-4 py-2 text-black bg-gray-200 hover:bg-white">
+                Update review
+              </button>
+            </Link>
+          )}
+        </div>
+        <div className="flex mt-10 gap-5">
+          <Image
+            src={review.image}
+            alt={review.title}
+            quality={100}
+            width={200}
+            height={200}
+            className="rounded-md w-1/3"
+          />
+          <div className="flex-1 flex justify-between flex-col gap-5">
+            <p className="whitespace-pre-line">{review.description}</p>
+            <div className="flex gap-5">
+              <div className="flex text-sm flex-col gap-2">
+                <p>Created by: {review.created_by}</p>
+                <p>Created at: {dayjs(review.created_at).fromNow()}</p>
+              </div>
+              <div className="flex text-sm flex-col gap-2">
+                <p>Upvotes: {review.upvote ? review.upvote : 0}</p>
+                <p>Comments: {review.comments ? review.comments.length : 0}</p>
+              </div>
+            </div>
+          </div>
+          {reviewOwner.id !== user?.id && (
+            <div className="flex flex-col gap-2 justify-center">
+              <IconSquareArrowUp stroke={2} size={48} />
+              <p className="text-center text-sm">Upvote</p>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col gap-5 mt-10 mb-20">
+          <h2 className="text-2xl font-semibold">Comments</h2>
+          {reviewOwner.id !== user?.id && (
+            <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+              <textarea
+                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                name="comment"
+                placeholder="Your comment"
+                required
+                rows={5}
+              />
+              <SubmitButton
+                formAction={createComment}
+                className="border border-foreground/20 max-w-40 rounded-md px-4 py-2 text-foreground mb-2"
+                pendingText="Creating..."
+              >
+                Add Comment
+              </SubmitButton>
+            </form>
+          )}
+          {review.comments ? (
+            review.comments.map((comment: string, index: number) => (
+              <div key={index} className="flex bg-btn-background p-5 gap-5">
+                <p>{comment}</p>
+              </div>
+            ))
+          ) : (
+            <p className="mt-3">No comments yet</p>
+          )}
+        </div>
+      </main>
+    </div>
+  );
 }
