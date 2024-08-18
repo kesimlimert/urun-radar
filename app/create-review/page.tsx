@@ -41,7 +41,7 @@ export default function CreateReview() {
           <h2 className="font-bold text-4xl mb-4">Create review</h2>
           <p className="text-lg">
             Please write detailed and honest reviews. True reviews will be voted
-            from community. All upvotes returns you as points.
+            from community. All votes returns you as points.
           </p>
           <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
             <label className="text-md" htmlFor="title">

@@ -2,15 +2,13 @@
 
 import { IconSquareArrowUp } from "@tabler/icons-react";
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
 
 type Props = {
-  onUpvote: () => Promise<boolean>;
+  onUpvote: () => Promise<void>;
   isUpvoted: boolean;
 };
 
 export default function UpvoteButton({ onUpvote, isUpvoted }: Props) {
-  console.log(isUpvoted);
   const [iconColor, setIconColor] = useState(isUpvoted ? "gray" : "white");
 
   const iconColorChange = () => {

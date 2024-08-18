@@ -43,6 +43,7 @@ export default async function Review({
 
   const review = reviewData[0];
   const reviewOwner = reviewOwnerData?.[0];
+  console.log(reviewOwner);
   const upvotedBy = reviewData[0].upvoted_by ?? [];
   const upvoted = upvotedBy.includes(user?.id);
   
@@ -71,6 +72,7 @@ export default async function Review({
   
     const upvotedBy = data?.upvoted_by ?? [];
     const upvoted = !upvotedBy.includes(user?.id);
+
     if (upvoted) {
       await supabase
         .from("reviews")
@@ -80,9 +82,15 @@ export default async function Review({
         })
         .eq("id", params.reviewId);
 
+      await supabase
+        .from("profile")
+        .update({
+          points: reviewOwner.points + 10,
+        })
+        .eq("id", reviewOwner.id);
+
       revalidatePath(`/reviews/${params.reviewId}`);
     }
-    return upvoted;
   };
 
   return (
@@ -116,7 +124,7 @@ export default async function Review({
                 <p>Created at: {dayjs(review.created_at).fromNow()}</p>
               </div>
               <div className="flex text-sm flex-col gap-2">
-                <p>Upvotes: {review.upvote ? review.upvote : 0}</p>
+                <p>Votes: {review.upvote ? review.upvote : 0}</p>
                 <p>Comments: {review.comments ? review.comments.length : 0}</p>
               </div>
             </div>
