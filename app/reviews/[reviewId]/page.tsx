@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import Navbar from "@/components/layout/Navbar";
 import Link from "next/link";
 import Image from "next/image";
-import { IconSquareArrowUp } from "@tabler/icons-react";
+import UpvoteButton from "@/components/buttons/UpvoteButton";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { SubmitButton } from "@/components/buttons/SubmitButton";
@@ -43,21 +43,47 @@ export default async function Review({
 
   const review = reviewData[0];
   const reviewOwner = reviewOwnerData?.[0];
-
+  const upvotedBy = reviewData[0].upvoted_by ?? [];
+  const upvoted = upvotedBy.includes(user?.id);
+  
   const createComment = async (formData: FormData) => {
     "use server";
     const comment = formData.get("comment");
     const supabase = createClient();
     const comments = reviewData?.[0]?.comments ?? [];
-    await supabase.from("reviews").update({
-      comments: [...comments, comment],
-    }).eq("id", params.reviewId);
-	revalidatePath(`/reviews/${params.reviewId}`);
+    await supabase
+      .from("reviews")
+      .update({
+        comments: [...comments, comment],
+      })
+      .eq("id", params.reviewId);
+    revalidatePath(`/reviews/${params.reviewId}`);
   };
+  
+  const handleUpvote = async () => {
+    "use server";
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("reviews")
+      .select("upvoted_by")
+      .eq("id", params.reviewId)
+      .single();
+  
+    const upvotedBy = data?.upvoted_by ?? [];
+    const upvoted = !upvotedBy.includes(user?.id);
+    if (upvoted) {
+      await supabase
+        .from("reviews")
+        .update({
+          upvote: review.upvote + 1,
+          upvoted_by: [...upvotedBy, user?.id],
+        })
+        .eq("id", params.reviewId);
 
-  console.log(review);
-  console.log(reviewOwner);
-  console.log(user);
+      revalidatePath(`/reviews/${params.reviewId}`);
+    }
+    return upvoted;
+  };
 
   return (
     <div className="flex-1 w-full flex flex-col items-center">
@@ -96,14 +122,10 @@ export default async function Review({
             </div>
           </div>
           {reviewOwner.id !== user?.id && (
-            <div className="flex flex-col gap-2 justify-center">
-              <IconSquareArrowUp stroke={2} size={48} />
-              <p className="text-center text-sm">Upvote</p>
-            </div>
+            <UpvoteButton isUpvoted={upvoted} onUpvote={handleUpvote} />
           )}
         </div>
         <div className="flex flex-col gap-5 mt-10 mb-20">
-          <h2 className="text-2xl font-semibold">Comments</h2>
           {reviewOwner.id !== user?.id && (
             <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
               <textarea
@@ -122,6 +144,7 @@ export default async function Review({
               </SubmitButton>
             </form>
           )}
+          <h2 className="text-2xl ml-1 font-semibold">Comments</h2>
           {review.comments ? (
             review.comments.map((comment: string, index: number) => (
               <div key={index} className="flex bg-btn-background p-5 gap-5">
