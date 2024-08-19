@@ -48,7 +48,7 @@ export default function ReviewsItem({
       <div className="flex">
         <Link
           href={"reviews/" + id}
-          className="flex w-full p-5 mb-5 bg-btn-background"
+          className="flex w-full rounded-md p-5 mb-5 bg-btn-background"
         >
           <div className="w-full flex justify-between">
             <div className="flex flex-col">
@@ -58,7 +58,7 @@ export default function ReviewsItem({
                   {tags.map((tag: string) => (
                     <span
                       key={tag}
-                      className="px-4 py-1 md:text-lg bg-neutral-700 rounded-full"
+                      className="px-4 py-1 md:text-lg bg-white text-black rounded-full"
                     >
                       {tag}
                     </span>
@@ -68,18 +68,18 @@ export default function ReviewsItem({
             </div>
             <div>
               <div className="flex text-xs md:text-sm flex-col gap-2">
-                <p className="text-gray-400">
+                <p>
                   <b>Created by:</b> {created_by}
                 </p>
-                <p className="text-gray-400">
+                <p>
                   <b>Votes: </b> {upvote ? upvote : 0}
                 </p>
-                <p className="text-gray-400">
+                <p>
                   <b>Comments: </b> {comments ? comments.length : 0}
                 </p>
-                <div className=" text-gray-400">
-                  <p>Created at: {dayjs(created_at).fromNow()}</p>
-                </div>
+                <p>
+                  <b>Created at: </b> {dayjs(created_at).fromNow()}
+                </p>
               </div>
             </div>
           </div>

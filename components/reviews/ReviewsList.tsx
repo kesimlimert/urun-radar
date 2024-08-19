@@ -41,7 +41,7 @@ export default function ReviewsList({ reviews }: ReviewsListItemProps) {
         <Link
           key={review.id}
           href={"reviews/" + review.id}
-          className="flex p-5 mb-5 bg-btn-background"
+          className="flex p-5 mb-5 rounded-md bg-btn-background"
         >
           <div className="w-full flex justify-between">
             <div>
@@ -51,7 +51,7 @@ export default function ReviewsList({ reviews }: ReviewsListItemProps) {
                   {review.tags.map((tag: string) => (
                     <span
                       key={tag}
-                      className="px-4 py-1 md:text-lg bg-neutral-700 rounded-full"
+                      className="px-4 py-1 md:text-lg bg-white text-black rounded-full"
                     >
                       {tag}
                     </span>
@@ -61,19 +61,19 @@ export default function ReviewsList({ reviews }: ReviewsListItemProps) {
             </div>
             <div>
               <div className="flex text-xs md:text-sm max-w-sm flex-col gap-2">
-                <p className="text-gray-400">
+                <p>
                   <b>Created by:</b> {review.created_by}
                 </p>
-                <p className="text-gray-400">
+                <p>
                   <b>Votes: </b> {review.upvote ? review.upvote : 0}
                 </p>
-                <p className="text-gray-400">
+                <p>
                   <b>Comments: </b>{" "}
                   {review.comments ? review.comments.length : 0}
                 </p>
-                <div className=" text-gray-400">
-                  <p>Created at: {dayjs(review.created_at).fromNow()}</p>
-                </div>
+                <p>
+                  <b>Created at:</b> {dayjs(review.created_at).fromNow()}
+                </p>
               </div>
             </div>
           </div>
