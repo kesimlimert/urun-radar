@@ -17,4 +17,3 @@
 4. **Earn Points**: Gain points based on the votes your reviews receive. The more helpful your review, the more points you earn!
 
 <br>
-It is under development.
