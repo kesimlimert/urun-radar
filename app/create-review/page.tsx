@@ -71,13 +71,14 @@ export default function CreateReview() {
               accept="image/png, image/jpeg"
               id="image"
               name="image"
-              className="px-4 py-2 mb-6"
+              className="px-4 py-2"
             />
-            <p className="text-sm text-gray-400">Only .png and .jpeg accepted</p>
+            <p className="text-sm mb-6 text-gray-400">Only .png and .jpeg accepted</p>
             <label className="text-md" htmlFor="tags">
               Tags
             </label>
             <TagsInput />
+            <p className="text-sm mb-6 text-gray-400">Press enter to save tags</p>
             <SubmitButton
               formAction={createReview}
               className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"

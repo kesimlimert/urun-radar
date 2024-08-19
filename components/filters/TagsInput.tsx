@@ -28,12 +28,12 @@ export default function TagsInput() {
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleInputKeyDown}
-                className='rounded-md px-4 py-2 bg-inherit border mb-6'
+                className='rounded-md px-4 py-2 bg-inherit border'
             />
             <input className='hidden' value={tags} readOnly name='tags' />
             <ul>
                 {tags.map((tag) => (
-                    <li key={tag} className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+                    <li key={tag} className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-5 mr-2'>
                         {tag}
                         <button onClick={() => handleTagRemove(tag)} className='ml-2 text-red-400'>Remove</button>
                     </li>
