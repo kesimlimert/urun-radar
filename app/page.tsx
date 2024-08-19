@@ -17,7 +17,8 @@ export default async function Index() {
 
   const { data: reviews, error: reviewsError } = await supabase
     .from("reviews")
-    .select(`id, title, created_by, created_at, comments, upvote, tags`);
+    .select(`id, title, created_by, created_at, comments, upvote, tags`)
+    .order('upvote', { ascending: false });
 
   if (!user) {
     return <Welcome />;
