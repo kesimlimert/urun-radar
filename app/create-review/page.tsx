@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Link from "next/link";
 import { uploadImage } from "@/utils/cloudinary";
 import { redirect } from "next/navigation";
-import TagsInput from "@/components/TagsInput";
+import TagsInput from "@/components/filters/TagsInput";
 
 export default function CreateReview() {
   const createReview = async (formData: FormData) => {

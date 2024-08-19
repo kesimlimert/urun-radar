@@ -28,10 +28,10 @@ export default async function Index() {
       <Navbar />
       <main className="w-full flex flex-col mt-20 max-w-4xl px-3">
         <div className="flex w-full mb-10 justify-between">
-          <h1 className="text-4xl font-bold">Top product reviews</h1>
+          <h1 className="text-3xl md:text-4xl font-bold">Top product reviews</h1>
           <Link href="/create-review">
-            <button className="rounded-md px-4 py-2 text-black bg-gray-200 hover:bg-white">
-              Create new review
+            <button className="rounded-md md:text-base text-xs px-2 md:px-4 whitespace-nowrap py-2 text-black bg-gray-200 hover:bg-white">
+              Create review
             </button>
           </Link>
         </div>
