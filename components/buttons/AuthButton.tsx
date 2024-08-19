@@ -27,7 +27,9 @@ export default async function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-4">
-      <p className="text-xs md:block hidden">{userName ? userName + " - " + points + " points"  : user.email}</p>
+      <p className="text-xs md:block hidden">
+        {userName ? userName + " - " + points + " points" : user.email}
+      </p>
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           Logout

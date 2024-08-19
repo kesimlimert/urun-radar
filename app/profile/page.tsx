@@ -10,11 +10,6 @@ import SearchProfile from "@/components/filters/SearchProfile";
 
 dayjs.extend(relativeTime);
 
-type Profile = {
-  display_name: string;
-  points: number;
-};
-
 export default async function ProtectedPage() {
   const supabase = createClient();
   const {
@@ -33,6 +28,8 @@ export default async function ProtectedPage() {
   const { data: allProfiles } = await supabase
     .from("profile")
     .select();
+
+  const profiles = allProfiles ?? [];
 
   if (profileError) {
     console.error(profileError);
@@ -93,7 +90,7 @@ export default async function ProtectedPage() {
             <h2 className="md:text-3xl text-2xl font-bold mt-3">
               Search Profile
             </h2>
-            <SearchProfile profiles={allProfiles} />
+            <SearchProfile profiles={profiles} />
           </div>
           {reviews.length > 0 ? (
             <>
