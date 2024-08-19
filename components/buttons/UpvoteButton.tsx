@@ -12,9 +12,9 @@ export default function UpvoteButton({ onUpvote, isUpvoted }: Props) {
   const [iconColor, setIconColor] = useState(isUpvoted ? "gray" : "white");
 
   const iconColorChange = () => {
-	if(iconColor === "white") {
-		setIconColor("gray");
-	}
+    if (iconColor === "white") {
+      setIconColor("gray");
+    }
   };
 
   return (
@@ -22,7 +22,7 @@ export default function UpvoteButton({ onUpvote, isUpvoted }: Props) {
       <form action={onUpvote}>
         <button onClick={iconColorChange}>
           <IconSquareArrowUp color={iconColor} stroke={2} size={48} />
-		</button>
+        </button>
       </form>
     </div>
   );

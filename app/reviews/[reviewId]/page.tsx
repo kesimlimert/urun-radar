@@ -43,7 +43,6 @@ export default async function Review({
 
   const review = reviewData[0];
   const reviewOwner = reviewOwnerData?.[0];
-  console.log(reviewOwner);
   const upvotedBy = reviewData[0].upvoted_by ?? [];
   const upvoted = upvotedBy.includes(user?.id);
   

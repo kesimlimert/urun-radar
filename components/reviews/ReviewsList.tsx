@@ -60,7 +60,7 @@ export default function ReviewsList({ reviews }: ReviewsListItemProps) {
               </div>
             </div>
             <div>
-              <div className="flex text-xs md:text-sm flex-col gap-2">
+              <div className="flex text-xs md:text-sm max-w-sm flex-col gap-2">
                 <p className="text-gray-400">
                   <b>Created by:</b> {review.created_by}
                 </p>

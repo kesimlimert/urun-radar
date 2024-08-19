@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { IconUser, IconNote, IconStars } from "@tabler/icons-react";
 import Link from "next/link";
-import ReviewsList from "@/components/reviews/ReviewsList";
+import ReviewsItem from "@/components/reviews/ReviewItem";
 import SearchProfile from "@/components/filters/SearchProfile";
 
 dayjs.extend(relativeTime);
@@ -25,9 +25,7 @@ export default async function ProtectedPage() {
     .select()
     .eq("id", user.id);
 
-  const { data: allProfiles } = await supabase
-    .from("profile")
-    .select();
+  const { data: allProfiles } = await supabase.from("profile").select();
 
   const profiles = allProfiles ?? [];
 
@@ -97,7 +95,32 @@ export default async function ProtectedPage() {
               <h2 className="text-3xl md:text-4xl mt-4 font-bold">
                 Your reviews
               </h2>
-              <ReviewsList reviews={reviews} />
+              {reviews && reviews.length > 0 ? (
+                reviews.map((review) => (
+                  <ReviewsItem
+                    key={review.id}
+                    id={review.id}
+                    title={review.title}
+                    created_by={review.created_by}
+                    created_at={review.created_at}
+                    comments={review.comments}
+                    upvote={review.upvote}
+                    tags={review.tags}
+                  />
+                ))
+              ) : (
+                <>
+                  <h2 className="text-4xl mt-8 font-bold">
+                    Looks like you dont have review. Lets create new one!
+                  </h2>
+                  <Link
+                    className="rounded-full max-w-sm text-center px-4 py-2 text-black bg-gray-200 hover:bg-white"
+                    href="/create-review"
+                  >
+                    Create new review
+                  </Link>
+                </>
+              )}
             </>
           ) : (
             <>
