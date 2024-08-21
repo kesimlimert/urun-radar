@@ -10,11 +10,15 @@ export default function CreateReview() {
   const createReview = async (formData: FormData) => {
     "use server";
     const title = formData.get("title");
-    const image = formData.get("image");
+    const image = formData.get("image") as File;
     const tags = formData.get("tags")?.toString().split(",").map(tag => tag.trim());
-    const description = formData.get("description"); 
-    const imageUrl = await uploadImage(image);
+    const description = formData.get("description");
     
+    let imageUrl = null;
+    if (image && image.size > 0) {
+      imageUrl = await uploadImage(image);
+    }
+
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     const { data } = await supabase.from("profile").select("display_name").eq("id", user?.id);

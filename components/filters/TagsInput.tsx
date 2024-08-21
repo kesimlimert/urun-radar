@@ -10,7 +10,7 @@ export default function TagsInput() {
     };
 
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && inputValue.trim() !== '') {
             setTags((prevTags) => [inputValue.trim(), ...prevTags]);
             setInputValue('');
             event.preventDefault();

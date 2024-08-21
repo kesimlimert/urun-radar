@@ -97,7 +97,9 @@ export default async function Review({
       <Navbar />
       <main className="w-full flex flex-col mt-20 max-w-4xl px-3">
         <div className="flex w-full mb-10 justify-between">
-          <h1 className="md:text-4xl md:text-left text-center text-3xl font-bold">{review.title}</h1>
+          <h1 className="md:text-4xl md:text-left text-center text-3xl font-bold">
+            {review.title}
+          </h1>
           {reviewOwner.id === user?.id && (
             <Link href={"/update-review/" + params.reviewId}>
               <button className="rounded-md px-4 py-2 text-black bg-gray-200 hover:bg-white">
@@ -107,18 +109,22 @@ export default async function Review({
           )}
         </div>
         <div className="flex mt-10 gap-5">
-          <div className="max-w-sm w-40">
-            <Image
-              src={review.image}
-              alt={review.title}
-              quality={100}
-              width={200}
-              height={200}
-              className="rounded-md w-full"
-            />
-          </div>
+          {review.image && (
+            <div className="max-w-sm w-40">
+              <Image
+                src={review.image}
+                alt={review.title}
+                quality={100}
+                width={200}
+                height={200}
+                className="rounded-md w-full"
+              />
+            </div>
+          )}
           <div className="flex-1 flex justify-between flex-col gap-5">
-            <p className="whitespace-pre-line md:text-base text-sm">{review.description}</p>
+            <p className="whitespace-pre-line md:text-base text-sm">
+              {review.description}
+            </p>
             <div className="flex gap-5">
               <div className="flex md:text-sm text-xs flex-col gap-2">
                 <p>Created by: {review.created_by}</p>

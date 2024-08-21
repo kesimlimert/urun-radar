@@ -55,13 +55,15 @@ export default function ReviewsItem({
               <h2 className="md:text-2xl text-lg font-semibold">{title}</h2>
               <div className="flex items-center justify-between w-full gap-5 pt-3">
                 <div className="flex gap-2 flex-wrap">
-                  {tags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="px-4 py-1 md:text-lg bg-white text-black rounded-full"
-                    >
-                      {tag}
-                    </span>
+                  {tags.length > 0  && tags.map((tag: string) => (
+                     tag.trim() !== '' && (
+                      <span
+                        key={tag}
+                        className="px-4 py-1 md:text-lg bg-white text-black rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    )
                   ))}
                 </div>
               </div>
