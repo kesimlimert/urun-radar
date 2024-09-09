@@ -1,19 +1,28 @@
-# UrunRadar
+# Urun Radar
 
-**UrunRadar** is a platform where users can freely review products and share their opinions with others. My goal is to create a community-driven space where quality, transparency, and honesty are at the forefront of product reviews.
+Urun Radar is a web application that allows users to write and read honest product reviews. Users can sign in to the app and post their own reviews, which can then be read, commented on, and upvoted by other signed-in users.
 
-## Features
+## Key Features
 
-- **Post Product Reviews**: Users can write detailed reviews about any product they want. These reviews are then shared with the community.
-- **Community Voting**: Other users can vote on these reviews. Well-written, transparent, and helpful reviews are pushed to the top, ensuring that the most reliable information is easily accessible.
-- **Earn Points**: Reviewers earn points when their reviews receive votes. This gamified element encourages users to provide accurate and valuable insights, creating a trustworthy environment for everyone.
-- **Transparency First**: The system is designed to highlight honest and detailed reviews, making it easier for users to find the most useful opinions on any product.
+- **Write Reviews**: Signed-in users can write reviews for products, including adding images and tags.
+- **Read Reviews**: All signed-in users can read the reviews written by others, sorted by the number of upvotes.
+- **Comment on Reviews**: Users can leave comments on any review to provide additional feedback or ask questions.
+- **Upvote Reviews**: Users can upvote reviews they find helpful, and the review owner earns points for each upvote.
+- **Search Reviews**: Users can search for reviews by tag or user profile.
+- **Search Profile**: Users can search for profiles to check user reviews or total points gained from upvotes.
 
-## How It Works
+## Technologies Used
 
-1. **Sign Up**: Create an account to start posting and voting on reviews.
-2. **Review Products**: Write reviews on any product you’ve used or are familiar with.
-3. **Vote on Reviews**: Browse reviews by other users and vote on those you find most helpful and transparent.
-4. **Earn Points**: Gain points based on the votes your reviews receive. The more helpful your review, the more points you earn!
+- **Next.js**: A React framework for building server-rendered, static, and dynamic websites and applications.
+- **Supabase**: An open-source alternative to Firebase, providing a full backend solution including authentication, real-time database, and storage.
+- **Tailwind CSS**: A utility-first CSS framework for quickly building custom user interfaces.
 
-<br>
+## Getting Started
+
+1. Clone the repository: `git clone https://github.com/kesimlimert/urun-radar.git`
+2. Install dependencies: `npm install`
+3. Set up your Supabase environment:
+   - Create a new Supabase project
+   - Copy the project URL and API key to your `.env.local` file
+4. Start the development server: `npm run dev`
+5. Open the app in your browser: `http://localhost:3000`
