@@ -4,12 +4,21 @@ Urun Radar is a web application that allows users to write and read honest produ
 
 ## Key Features
 
-- **Write Reviews**: Signed-in users can write reviews for products, including adding images and tags.
+- **Create Reviews**: Signed-in users can create reviews for products, including adding images and tags.
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954399/urun%20radar/ewneheagdxzt3zhdhf7p.png)
 - **Read Reviews**: All signed-in users can read the reviews written by others, sorted by the number of upvotes.
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954399/urun%20radar/q66vx4gzpfbk7n94aq1b.png)
 - **Comment on Reviews**: Users can leave comments on any review to provide additional feedback or ask questions.
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954805/urun%20radar/bj2yoczpqelg5n0ugtdm.png)
 - **Upvote Reviews**: Users can upvote reviews they find helpful, and the review owner earns points for each upvote.
-- **Search Reviews**: Users can search for reviews by tag or user profile.
+- **Filter Reviews**: Users can filter reviews by tag.
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954398/urun%20radar/vqb3gbdfqtifb4niays9.png)
 - **Search Profile**: Users can search for profiles to check user reviews or total points gained from upvotes.
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954399/urun%20radar/yirib9l6cgz0hdtuyav2.png)
+- **Light and Dark Theme**: Changes automatically up to system preferences.
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954399/urun%20radar/uwflbrdqrefkhnsp7ulx.png)
+
+![screenshot1](https://res.cloudinary.com/dfatlyafz/image/upload/v1727954399/urun%20radar/gmik48ecbxjzgqncssrs.png)
 
 ## Technologies Used
 
